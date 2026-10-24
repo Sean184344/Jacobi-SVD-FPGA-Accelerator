@@ -1,0 +1,24 @@
+Test Matrix (input to jacobi_svd_3x3)
+--------------------------------------
+3  1  2
+2  6  4
+1  5  9
+
+FPGA Run Results
+--------------------------------------
+Iterations = 5
+Converged  = YES
+
+Singular Values (FPGA vs NumPy reference)
+--------------------------------------
+sigma_1 : FPGA = 12.703932   NumPy = 12.704583   |Error| = 0.000651
+sigma_2 : FPGA = 3.117287    NumPy = 3.117398    |Error| = 0.000111
+sigma_3 : FPGA = 2.423829    NumPy = 2.423921    |Error| = 0.000092
+
+Notes
+--------------------------------------
+- FPGA values are fixed-point (Q16 format) results read out of jacobi_svd_3x3
+  after svd_done asserts.
+- NumPy reference generated via scripts/numpy_reference.py (np.linalg.svd).
+- Errors are within expected fixed-point quantization tolerance for a
+  5-sweep (rotation_count) convergence on a well-conditioned 3x3 matrix.
